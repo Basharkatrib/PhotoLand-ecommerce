@@ -65,6 +65,27 @@ p {
 body{
   background-color: rgb(0, 0, 0);
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(245, 158, 11);
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(204, 133, 9);
+}
+
 .swiper-button-next:after, .swiper-button-prev:after{
   color: rgb(245, 158, 11);
 }

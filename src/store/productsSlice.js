@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { FetchProduct } from '../services/FetchProduct'; 
+import { FetchProducts } from '../services/FetchProducts'; 
 
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (categoryId, { rejectWithValue }) => {
     try {
-      const data = await FetchProduct(categoryId); 
+      const data = await FetchProducts(categoryId); 
       return data;
     } catch (error) {
       return rejectWithValue(error.response?.data || "Error fetching Products");
