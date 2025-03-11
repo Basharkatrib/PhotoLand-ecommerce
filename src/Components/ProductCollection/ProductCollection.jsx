@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../store/productsSlice';
 import { fetchCategories } from '../../store/categoriesSlice';
-import { addItem, increaseQuantity, decreaseQuantity, removeItem } from '../../store/cartSlice'
+import { addItem, increaseQuantity, decreaseQuantity, removeItem } from '../../store/cartSlice';
 import { Link } from 'react-router-dom';
 
 function ProductCollection() {
@@ -46,7 +46,7 @@ function ProductCollection() {
                         <div className='text-white h-12 w-full overflow-hidden line-clamp-2'>{product.subtitle}</div>
                         <div className=' w-full flex justify-between items-center'>
                             <div className='text-amber-500'>${product.price}</div>
-                            <div className='bg-amber-500 px-2 rounded-lg cursor-pointer text-black' onClick={() => dispatch(addItem(product))}>Add To Cart</div>
+                            <div className='bg-amber-500 px-2 flex justify-center items-center  rounded-lg cursor-pointer text-black' onClick={() => dispatch(addItem(product))}>Add To Cart</div>
                         </div>
                         <div className={`${product.isNew ? "block" : "hidden"} bg-amber-500 px-2 rounded-lg font-bold absolute top-1 right-2 text-black`}>NEW</div>
                     </div>
