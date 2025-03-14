@@ -9,13 +9,8 @@ function ProductCollection() {
     const dispatch = useDispatch();
     const { products, status, error } = useSelector((state) => state.products);
     const selectedCategory = useSelector((state) => state.categories.setCategory);
+    const search = useSelector((state) => state.search.data);
 
-
-
-    useEffect(() => {
-        dispatch(fetchProducts());
-        console.log(products);
-    }, [dispatch]);
 
 
     if (status === 'loading') return <p>Loading products...</p>;
@@ -25,7 +20,11 @@ function ProductCollection() {
         <div className='flex flex-col basis-4/5'>
             <div className='text-white font-bold'>{products.length} RESULT FOUND FOR {selectedCategory}</div>
             <div className='flex flex-wrap w-full gap-3'>
-                {products.map((product) => (
+                {products
+                .filter((product) => {
+                    return search.toLowerCase() === '' ? product : product.title.toLowerCase().includes(search);
+                })
+                .map((product) => (
                     <div className='anim w-[24%] bg-black  rounded-md flex flex-col justify-between p-2 relative' key={product.id}>
                         {product.image && product.image.length > 0 ? (
                             <div className='w-full flex justify-center h-1/2 cursor-pointer'>

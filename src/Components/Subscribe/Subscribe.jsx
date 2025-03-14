@@ -1,6 +1,6 @@
 function Subscribe() {
     return (
-        <div className="flex w-full justify-center text-white py-5 border-b-2 border-amber-500 px-3">
+        <div className="flex w-full justify-center text-white py-5 border-b-2 border-amber-500 px-2 md:px-3">
             <div className="text-center w-full lg:w-1/3 flex flex-col gap-5 items-center">
                 <h1 className=" font-bold text-2xl">SUBSCRIBE TO OUR NEWSLETTER</h1>
                 <p>Be the first to get the latest news about trends, promotion and much more</p>

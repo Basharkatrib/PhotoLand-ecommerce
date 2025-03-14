@@ -64,6 +64,7 @@ p {
 
 body{
   background-color: rgb(0, 0, 0);
+  min-height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -98,5 +99,11 @@ body{
 }
 .anim:hover img{
   transform: scale(0.9);
+}
+
+@media (max-width:768px){
+  .swiper-button-next:after, .swiper-button-prev:after{
+    display: none;
+  }
 }
 

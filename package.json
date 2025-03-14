@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^8.8.2",
     "@reduxjs/toolkit": "^2.6.0",
+    "@stripe/react-stripe-js": "^3.4.0",
+    "@stripe/stripe-js": "^6.0.0",
     "axios": "^1.8.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

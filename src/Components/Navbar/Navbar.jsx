@@ -3,8 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Collapse, Dropdown, initTWE } from "tw-elements";
 import { increaseQuantity, decreaseQuantity, removeItem, removeAll } from '../../store/cartSlice';
 import { Link } from "react-router-dom";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import Checkout from "../Checkout/Checkout";
+import { searchItem } from "../../store/searchSlice";
 
 function Navbar() {
+
+    const initialOptions = {
+        "client-id": "ATIzfGbQ6tjutpRZ4PBZC-2lMC1JjcKbw7Lmag_Xil2Hlwpc5_fN_eHlVVeQZZVpZON2NmcJ1ZbKGby7",
+        currency: "USD",
+        intent: "capture",
+    };
 
     useEffect(() => {
         initTWE({ Collapse, Dropdown });
@@ -13,26 +22,33 @@ function Navbar() {
     const dispatch = useDispatch();
 
     const [open, isOpen] = useState(false);
+    const [search, setSearch] = useState("");
     const cart = useSelector(state => state.cart);
+
+    useEffect(()=>{
+        console.log(search);
+        dispatch(searchItem(search));
+    }
+    ,[search])
 
 
     return (
         <>
             <nav
                 className="flex-no-wrap relative flex w-full items-center justify-between bg-black py-3 ">
-                <div className="flex w-full flex-wrap items-center justify-between px-1 md:px-3">
+                <div className="flex w-full flex-wrap items-center justify-between px-2 md:px-3">
 
                     <div className="w-full flex justify-between items-center">
 
 
                         <div
                             className="mr-2">
-                            <Link to="/"><h1 className="text-white font-bold sm:text-2xl cursor-pointer"><span className="text-amber-500">PHOTO</span>LAND</h1></Link>
+                            <Link to="/"><h1 className="text-white font-bold text-xl sm:text-2xl cursor-pointer"><span className="text-amber-500">PHOTO</span>LAND</h1></Link>
                         </div>
 
 
                         <form className="flex items-center w-[600px] h-[30px] mr-2">
-                            <input className="p-1 h-full rounded-tl rounded-bl w-full border-none outline-none" type="text" placeholder="search" />
+                            <input className="p-1 h-full rounded-tl rounded-bl w-full border-none outline-none" type="text" placeholder="search" value={search} onChange={(e)=> setSearch(e.target.value)} />
                             <button className="p-1.5 md:px-4 bg-amber-500 flex items-center justify-center h-full rounded-tr rounded-br ">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -45,8 +61,8 @@ function Navbar() {
 
 
                         <div className="relative flex items-center">
-                            <a className="dark:text-white" onClick={() => isOpen(true)} href="#">
-                                <span className="[&>svg]:w-12">
+                            <a className="dark:text-white" onClick={() => isOpen(true)}>
+                                <span className="[&>svg]:w-9 cursor-pointer">
                                     <svg
 
                                         xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +94,7 @@ function Navbar() {
                             <path fill="#FFD43B" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                         </svg>
                     </div>
-                    <div className="w-full max-h-full basis-3/4 overflow-y-auto py-2">
+                    <div className="w-full max-h-full basis-3/5 overflow-y-auto py-2">
                         {
                             cart.items.map((item) => {
                                 return <div className="w-full h-auto flex items-center px-5 border-b-2 border-amber-500 py-1 " key={item.id}>
@@ -89,7 +105,7 @@ function Navbar() {
                                         <div className="flex w-full justify-between items-start">
                                             <div className="text-white basis-[95%]">{item.subtitle}</div>
                                             <svg
-                                            onClick={() => dispatch(removeItem(item.id))}
+                                                onClick={() => dispatch(removeItem(item.id))}
                                                 className=" flex h-7 cursor-pointer basis-[5%]"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 384 512">
@@ -113,14 +129,18 @@ function Navbar() {
                         }
 
                     </div>
-                    <div className={`${cart.items.length > 0 ? "block" : " hidden"} basis-1/4 flex flex-col gap-4 py-3 px-5`}>
+                    <div className={`${cart.items.length > 0 ? "block" : " hidden"} basis-2/5 flex flex-col gap-4 py-3 px-5`}>
                         <div className="w-full flex justify-between">
                             <div className="text-white">Total Price</div>
                             <div className="text-white">${cart.totalPrice}</div>
                         </div>
-                        <div className="w-full flex gap-2">
-                            <div onClick={() => dispatch(removeAll())} className="basis-1/3 cursor-pointer bg-amber-500 text-black flex justify-center items-center p-1 font-bold rounded-md">CLEAR CART</div>
-                            <div className="basis-2/3 cursor-pointer bg-amber-500 text-black flex justify-center items-center gap-2 p-1 font-bold rounded-md">CHECKOUT <svg className="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z" /></svg></div>
+                        <div className="w-full flex-col">
+                            <div onClick={() => dispatch(removeAll())} className="basis-1/3 mb-4 cursor-pointer bg-amber-500 text-black flex justify-center items-center p-1 font-bold rounded-md">CLEAR CART</div>
+                            <div className="basis-2/3 cursor-pointer w-full text-black flex justify-center items-center font-bold rounded-md">
+                                <PayPalScriptProvider options={initialOptions}>
+                                    <Checkout />
+                                </PayPalScriptProvider>
+                            </div>
 
                         </div>
 

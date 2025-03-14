@@ -3,6 +3,8 @@ import categoriesReducer from './categoriesSlice';
 import cartReducer from './cartSlice';
 import productSlice from './productSlice';
 import productsReducer from './productsSlice';
+import searchReducer from './searchSlice';
+
 
 
 
@@ -12,6 +14,7 @@ const store = configureStore({
     products: productsReducer,
     product: productSlice,
     cart: cartReducer,
+    search: searchReducer
   }
 });
 

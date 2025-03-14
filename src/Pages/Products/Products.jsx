@@ -3,7 +3,7 @@ import ProductCollection from "../../Components/ProductCollection/ProductCollect
 
 function Products() {
     return (
-        <div className="flex w-full gap-5 bg-neutral-800 p-4" >
+        <div className="flex-col md:flex md:flex-row w-full gap-5 bg-neutral-800 p-4" >
             <ListCategory />
             <ProductCollection />
         </div>

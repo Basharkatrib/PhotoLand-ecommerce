@@ -2,6 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { FetchCategory } from '../services/FetchCategory'; 
 
 
+const selected = localStorage.getItem('set') !== null ? JSON.parse(localStorage.getItem('set')) : null;
+
+
 export const fetchCategories = createAsyncThunk(
   'categories/fetchCategories',
   async (_, { rejectWithValue }) => {
@@ -20,11 +23,12 @@ const categoriesSlice = createSlice({
     categories: [],
     status: 'idle', 
     error: null,
-    setCategory: null
+    setCategory: selected
   },
   reducers: {
     setCateg: (state, action) => {
       state.setCategory = action.payload;
+      localStorage.setItem('set', JSON.stringify(state.setCategory));
     }
   }, 
   extraReducers: (builder) => {

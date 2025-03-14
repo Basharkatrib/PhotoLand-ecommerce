@@ -2,6 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { FetchProducts } from '../services/FetchProducts'; 
 
 
+const prod = localStorage.getItem('prod') !== null ? JSON.parse(localStorage.getItem('prod')) : [];
+
+
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (categoryId, { rejectWithValue }) => {
@@ -17,7 +20,7 @@ export const fetchProducts = createAsyncThunk(
 const productSlice = createSlice({
   name: 'products',
   initialState: {
-    products: [],
+    products: prod,
     status: 'idle', 
     error: null
   },
@@ -30,6 +33,7 @@ const productSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.products = action.payload;
+        localStorage.setItem('prod', JSON.stringify(state.products));
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';
