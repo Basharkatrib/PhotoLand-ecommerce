@@ -14,6 +14,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import Loading from '../Loading/Loading';
 
 function Product() {
     const { id } = useParams();
@@ -29,13 +30,13 @@ function Product() {
     }, [product]);
 
 
-    if (status === 'loading') return <p>Loading...</p>;
+    if (status === 'loading') return <Loading />;
     if (status === 'failed') return <p>Error: {error}</p>;
     if (!product) return <p>No product found</p>;
 
     return (
-        <div className="w-full lg:h-[70vh]  bg-neutral-700 flex justify-center items-center p-4">
-            <div className='w-full h-full flex flex-col md:flex-row gap-5 p-3'>
+        <div className="mt-[60px] w-full lg:h-[70vh]  bg-neutral-700 flex justify-center items-center p-2 md:p-4">
+            <div className='w-full h-full flex flex-col md:flex-row gap-5 md:p-3'>
                 <Swiper
                     className='basis-2/5 w-full max-h-full bg-gradient-to-b from-[#5f5f5f] via-[#525252] to-[#303030] flex justify-center items-center rounded'
                     modules={[Navigation, Pagination,]}
@@ -49,8 +50,8 @@ function Product() {
                     })}
                 </Swiper>
 
-                <div className='basis-3/5 flex h-full  justify-center items-center'>
-                    <div className='flex flex-col justify-between w-5/6 h-full  gap-3'>
+                <div className='basis-3/5 flex h-full  md:justify-center items-center'>
+                    <div className='flex flex-col justify-between md:w-5/6 h-full  gap-3'>
                         <div className=' text-amber-500 text-xl font-bold'>{product.title}</div>
                         <div className='text-white text-3xl font-bold'>{product.subtitle}</div>
                         <div className='text-white text-[15px]'>{product.desc}</div>

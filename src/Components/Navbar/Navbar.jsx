@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Checkout from "../Checkout/Checkout";
 import { searchItem } from "../../store/searchSlice";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Navbar() {
 
@@ -31,11 +33,17 @@ function Navbar() {
     }
     ,[search])
 
+    useEffect(()=>{
+        if(cart.items.length <length> 0){
+            isOpen(false);
+        }
+    },[cart.items])
+
 
     return (
         <>
             <nav
-                className="flex-no-wrap relative flex w-full items-center justify-between bg-black py-3 ">
+                className="flex-no-wrap top-0 fixed z-50 flex w-full items-center justify-between bg-black py-3 ">
                 <div className="flex w-full flex-wrap items-center justify-between px-2 md:px-3">
 
                     <div className="w-full flex justify-between items-center">
@@ -81,7 +89,7 @@ function Navbar() {
             </nav>
             <div
                 className={`fixed top-0  right-0 h-full z-50 bg-neutral-800 transition-all duration-500 
-                ${open ? "md:w-1/3 w-full   opacity-100 pointer-events-auto" : "w-0 opacity-0 "}`}>
+                ${open && cart.items.length > 0 ? "md:w-1/3 w-full   opacity-100 pointer-events-auto" : "w-0 opacity-0 "}`}>
 
                 <div className="flex flex-col h-full">
                     <div className="w-full  flex justify-between items-center text-white font-bold border-b-2 border-amber-500 p-2">
@@ -94,7 +102,7 @@ function Navbar() {
                             <path fill="#FFD43B" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                         </svg>
                     </div>
-                    <div className="w-full max-h-full basis-3/5 overflow-y-auto py-2">
+                    <div className="w-full max-h-full basis-2/3 overflow-y-auto py-2">
                         {
                             cart.items.map((item) => {
                                 return <div className="w-full h-auto flex items-center px-5 border-b-2 border-amber-500 py-1 " key={item.id}>
@@ -129,7 +137,7 @@ function Navbar() {
                         }
 
                     </div>
-                    <div className={`${cart.items.length > 0 ? "block" : " hidden"} basis-2/5 flex flex-col gap-4 py-3 px-5`}>
+                    <div className={`${cart.items.length > 0 ? "block" : " hidden"} justify-end basis-1/3 flex flex-col gap-4 py-3 px-5`}>
                         <div className="w-full flex justify-between">
                             <div className="text-white">Total Price</div>
                             <div className="text-white">${cart.totalPrice}</div>
@@ -147,6 +155,7 @@ function Navbar() {
                     </div>
 
                 </div>
+                
             </div>
 
 

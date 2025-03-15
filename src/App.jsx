@@ -9,6 +9,7 @@ import Product from './Pages/Product/Product';
 import { setCateg } from './store/categoriesSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import Thank from './Pages/Thank/Thank';
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/thank" element={<Thank />} />
       </Routes>
       <Subscribe />
       <Footer />

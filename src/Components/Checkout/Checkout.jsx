@@ -3,11 +3,14 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import { removeAll } from '../../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function Checkout() {
 
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart);
+    const navigat = useNavigate();
 
     const onCreateOrder = (data, actions) => {
         return actions.order.create({
@@ -16,7 +19,7 @@ function Checkout() {
                     reference_id: "order_12345",
                     amount: {
                         currency_code: "USD",
-                        value: cart.totalPrice, 
+                        value: cart.totalPrice,
                     },
                 },
             ],
@@ -41,7 +44,8 @@ function Checkout() {
                     });
 
                 console.log("Transaction Details:", details);
-                alert(`Transaction completed by ${details.payer.name.given_name}`);
+                navigat('/thank');
+
             })
             .catch((error) => {
                 console.error("Error capturing order:", error);
@@ -50,12 +54,15 @@ function Checkout() {
     };
 
     return (
-        <PayPalButtons
-            className='w-full'
-            style={{ layout: "vertical" }}
-            createOrder={onCreateOrder}
-            onApprove={onApproveOrder}
-        />
+        <>
+            <PayPalButtons
+                className='w-full'
+                style={{ layout: "vertical" }}
+                createOrder={onCreateOrder}
+                onApprove={onApproveOrder}
+            />
+           
+        </>
     );
 }
 
