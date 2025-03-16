@@ -44,13 +44,13 @@ function ProductCollection() {
                         <div className='anim bg-gradient-to-tr from-[#3b3b3b] via-[#3b3b3b] to-[#e1e4df] sm:basis-[48%] md:basis-[48%] lg:basis-[32%]  xl:basis-[24%] bg-black  rounded-md flex flex-col justify-between p-2 relative' key={product.id}>
                             {product.image && product.image.length > 0 ? (
                                 <div className='w-full flex justify-center h-1/2 cursor-pointer'>
-                                    <Link className='w-2/3 h-full flex justify-center' to={`/product/${product.documentId}`}>
+                                    <div className='w-2/3 h-full flex justify-center'>
                                         <img
                                             className='object-fill h-full transition-all duration-300'
                                             src={product.image[0].url}
                                             alt={product.title}
                                         />
-                                    </Link>
+                                    </div>
 
                                 </div>
 
@@ -58,10 +58,10 @@ function ProductCollection() {
                                 <p>No Image Available</p>
                             )}
                             <div className='text-amber-500 font-bold'>{product.title}</div>
-                            <div className='text-white h-12 w-full overflow-hidden line-clamp-2'>{product.subtitle}</div>
+                            <div className='text-white h-12 w-full overflow-hidden line-clamp-2'>{product.desc}</div>
                             <div className=' w-full flex justify-between items-center'>
                                 <div className='text-amber-500'>${product.price}</div>
-                                <div className='bg-amber-500 px-2 flex justify-center items-center  rounded-lg cursor-pointer text-black' onClick={() => AddItem(product)}>Add To Cart</div>
+                               <Link to={`/product/${product.documentId}`}><div className=' text-amber-500 px-2 flex justify-center items-center rounded-lg cursor-pointer gap-2 '>View Details <svg xmlns="http://www.w3.org/2000/svg" height="20" width="17.5" viewBox="0 0 448 512"><path fill="#f59e0b" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></div></Link>
                             </div>
                             <div className={`${product.isNew ? "block" : "hidden"} bg-amber-500 px-2 rounded-lg font-bold absolute top-1 right-2 text-black`}>NEW</div>
                         </div>

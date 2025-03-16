@@ -12,6 +12,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { Link } from 'react-router-dom';
 function Slider() {
     return (
         <div className='w-full mt-3 md:mt-0 flex flex-col md:flex-row md:basis-4/5 gap-5 h-[900px] md:h-full'>
@@ -35,7 +36,7 @@ function Slider() {
                         <div className="absolute flex flex-col w-[300px] md:w-[150px] top-[10px] left-4 md:top-[100px] md:left-14">
                             <div className="text-white">SPECIAL OFFER</div>
                             <div className="text-white text-3xl font-bold">SAVE 20% ON YOUR FIRST ORDER</div>
-                            <div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div>
+                            <Link to="/products"><div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div></Link>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -51,7 +52,7 @@ function Slider() {
                         <div className="absolute flex flex-col w-[300px] md:w-[150px] top-[10px] left-4 md:top-[100px] md:left-14">
                             <div className="text-white">SPECIAL OFFER</div>
                             <div className="text-white text-3xl font-bold">SAVE 20% ON YOUR FIRST ORDER</div>
-                            <div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div>
+                            <Link to="/products"><div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div></Link>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -67,7 +68,7 @@ function Slider() {
                         <div className="absolute flex flex-col w-[300px] md:w-[150px] top-[10px] left-4 md:top-[100px] md:left-14">
                             <div className="text-white">SPECIAL OFFER</div>
                             <div className="text-white text-3xl font-bold">SAVE 20% ON YOUR FIRST ORDER</div>
-                            <div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div>
+                            <Link to="/products"><div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div></Link>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -83,7 +84,7 @@ function Slider() {
                         <div className="absolute flex flex-col w-[300px] md:w-[150px] top-[10px] left-4 md:top-[100px] md:left-14">
                             <div className="text-white">SPECIAL OFFER</div>
                             <div className="text-white text-3xl font-bold">SAVE 20% ON YOUR FIRST ORDER</div>
-                            <div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div>
+                            <Link to="/products"><div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div></Link>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -99,7 +100,7 @@ function Slider() {
                         <div className="absolute flex flex-col w-[300px] md:w-[150px] top-[10px] left-4 md:top-[100px] md:left-14">
                             <div className="text-white">SPECIAL OFFER</div>
                             <div className="text-white text-3xl font-bold">SAVE 20% ON YOUR FIRST ORDER</div>
-                            <div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div>
+                            <Link to="/products"><div className=' bg-amber-500 text-black w-fit py-1 px-5 mt-3 md:mt-9 rounded cursor-pointer'>SHOP NOW</div></Link>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -115,7 +116,7 @@ function Slider() {
 
                     }}
                 >
-                    <div className="absolute flex flex-col w-[150px] md:w-[200px] top-9 left-3">
+                    <div className="absolute flex flex-col w-[150px] md:w-[120px] top-9 left-3">
                         <div className=" text-amber-500">SPECIAL OFFER</div>
                         <div className="text-white text-xl font-bold">SAVE 20% ON YOUR FIRST ORDER</div>
                     </div>
@@ -128,7 +129,7 @@ function Slider() {
 
                     }}
                 >
-                    <div className="absolute flex flex-col w-[150px] md:w-[200px] top-9 left-3">
+                    <div className="absolute flex flex-col w-[150px] md:w-[120px] top-9 left-3">
                         <div className="text-amber-500">SPECIAL OFFER</div>
                         <div className="text-white text-xl font-bold">SAVE 20% ON YOUR FIRST ORDER</div>
                     </div>

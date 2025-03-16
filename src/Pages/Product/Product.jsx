@@ -51,7 +51,7 @@ function Product() {
                 </Swiper>
 
                 <div className='basis-3/5 flex h-full  md:justify-center items-center'>
-                    <div className='flex flex-col justify-between md:w-5/6 h-full  gap-3'>
+                    <div className='flex flex-col  md:w-5/6 h-full  gap-3'>
                         <div className=' text-amber-500 text-xl font-bold'>{product.title}</div>
                         <div className='text-white text-3xl font-bold'>{product.subtitle}</div>
                         <div className='text-white text-[15px]'>{product.desc}</div>

@@ -58,13 +58,13 @@ function ListCategory() {
                 <Swiper
                     // install Swiper modules
                     modules={[Navigation, Pagination]}
-                    slidesPerView={4}
+                    slidesPerView={3}
                     className=' text-white w-full h-7'
                 >
                     {categories.map((category) => (
                         <SwiperSlide className='w-12' >
                             <Link to="/products" key={category.id}>
-                                <div className={`${setCategory === category.title ? 'text-amber-500' : ''} border-r-2 border-amber-500 text-center`} onClick={() => handleCategoryClick(category.id, category.title)}> {/* ✅ التصحيح هنا */}
+                                <div className={`${setCategory === category.title ? 'text-amber-500' : ''} text-[14px] border-r-2 border-amber-500 text-center`} onClick={() => handleCategoryClick(category.id, category.title)}> {/* ✅ التصحيح هنا */}
                                     {category.title}
                                 </div>
                             </Link>
