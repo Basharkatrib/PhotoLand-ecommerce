@@ -30,14 +30,13 @@ function Navbar() {
     useEffect(() => {
         console.log(search);
         dispatch(searchItem(search));
-    }
-        , [search])
+    }, [search]);
 
     useEffect(() => {
-        if (cart.items.length < length > 0) {
+        if (cart.items.length < 1) {
             isOpen(false);
         }
-    }, [cart.items]);
+    }, [cart.items.length]);
 
     const remove = (id , title) => {
         toast.error(`${title} was deleted!`, {
@@ -71,7 +70,7 @@ function Navbar() {
 
 
                         <form className="flex items-center w-[600px] h-[30px] mr-2">
-                            <input className="p-1 h-full rounded-tl rounded-bl w-full border-none outline-none" type="text" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                            <input className="py-1 px-3 placeholder:text-amber-500 h-full rounded-tl rounded-bl w-full border-none outline-none" type="text" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)} />
                             <button className="p-1.5 md:px-4 bg-amber-500 flex items-center justify-center h-full rounded-tr rounded-br ">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
