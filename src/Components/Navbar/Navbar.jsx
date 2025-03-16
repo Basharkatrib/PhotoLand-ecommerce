@@ -27,17 +27,32 @@ function Navbar() {
     const [search, setSearch] = useState("");
     const cart = useSelector(state => state.cart);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(search);
         dispatch(searchItem(search));
     }
-    ,[search])
+        , [search])
 
-    useEffect(()=>{
-        if(cart.items.length <length> 0){
+    useEffect(() => {
+        if (cart.items.length < length > 0) {
             isOpen(false);
         }
-    },[cart.items])
+    }, [cart.items]);
+
+    const remove = (id , title) => {
+        toast.error(`${title} was deleted!`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+        dispatch(removeItem(id))
+
+    }
 
 
     return (
@@ -56,7 +71,7 @@ function Navbar() {
 
 
                         <form className="flex items-center w-[600px] h-[30px] mr-2">
-                            <input className="p-1 h-full rounded-tl rounded-bl w-full border-none outline-none" type="text" placeholder="search" value={search} onChange={(e)=> setSearch(e.target.value)} />
+                            <input className="p-1 h-full rounded-tl rounded-bl w-full border-none outline-none" type="text" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)} />
                             <button className="p-1.5 md:px-4 bg-amber-500 flex items-center justify-center h-full rounded-tr rounded-br ">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +129,7 @@ function Navbar() {
                                         <div className="flex w-full justify-between items-start">
                                             <div className="text-white basis-[95%]">{item.title}</div>
                                             <svg
-                                                onClick={() => dispatch(removeItem(item.id))}
+                                                onClick={() => remove(item.id , item.title)}
                                                 className=" flex h-7 cursor-pointer basis-[8%]"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 384 512">
@@ -157,7 +172,8 @@ function Navbar() {
 
                 </div>
                 
-            </div>
+
+            </div>    
 
 
         </>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProduct } from '../../store/productSlice';
 import Slider from '../../Components/Slider/Slider';
 import { addItem } from '../../store/cartSlice';
-
+import { ToastContainer, toast } from 'react-toastify';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -20,6 +20,20 @@ function Product() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { product, status, error } = useSelector(state => state.product);
+
+    const AddItem = (prod) => {
+        toast.success(`${prod.title} added to cart!`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+        dispatch(addItem(prod));
+    };
 
     useEffect(() => {
         dispatch(fetchProduct(id));
@@ -57,7 +71,7 @@ function Product() {
                         <div className='text-white text-[15px]'>{product.desc}</div>
                         <div className='flex w-full gap-3'>
                             <div className='text-amber-500 text-xl font-bold'>${product.price}</div>
-                            <div className='bg-amber-500 flex justify-center items-center font-bold px-2 rounded-lg cursor-pointer text-black' onClick={() => dispatch(addItem(product))}>Add To Cart</div>
+                            <div className='bg-amber-500 flex justify-center items-center font-bold px-2 rounded-lg cursor-pointer text-black' onClick={() => AddItem(product)}>Add To Cart</div>
                         </div>
 
 
@@ -68,6 +82,21 @@ function Product() {
 
 
 
+            </div>
+            <div>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    
+                />
             </div>
 
         </div>

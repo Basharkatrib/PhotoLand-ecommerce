@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import ListCategory from "../../Components/ListCategory/ListCategory";
 import ProductCollection from "../../Components/ProductCollection/ProductCollection";
 import Loading from "../Loading/Loading";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Products() {
 
