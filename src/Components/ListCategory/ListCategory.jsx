@@ -4,7 +4,7 @@ import { fetchCategories } from '../../store/categoriesSlice';
 import { fetchProducts } from '../../store/productsSlice';
 import { Link } from 'react-router-dom';
 import { setCateg } from '../../store/categoriesSlice';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y, FreeMode } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 
@@ -57,8 +57,9 @@ function ListCategory() {
             <div className='md:hidden'>
                 <Swiper
                     // install Swiper modules
-                    modules={[Navigation, Pagination]}
+                    modules={[Navigation, Pagination, FreeMode]}
                     slidesPerView={3}
+                    freeMode={true}
                     className=' text-white w-full h-7'
                 >
                     {categories.map((category) => (

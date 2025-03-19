@@ -1,4 +1,4 @@
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay} from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import img1 from '../../assets/1.png'
 import img2 from '../../assets/2.png'
@@ -18,9 +18,14 @@ function Slider() {
         <div className='w-full mt-3 md:mt-0 flex flex-col md:flex-row md:basis-4/5 gap-5 h-[900px] md:h-full'>
             <Swiper
                 // install Swiper modules
-                modules={[Navigation, Pagination]}
+                modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={1}
-
+                autoplay={{
+                    delay: 2000,
+                    pauseOnMouseEnter: true,
+                    disableOnInteraction: false
+                }}
+                loop
                 pagination={{ clickable: true, }}
                 className=' text-white md:w-6 h-full w-full md:h-full  md:basis-2/3 rounded-md'
             >
