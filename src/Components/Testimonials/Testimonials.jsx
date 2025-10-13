@@ -8,7 +8,7 @@ function Testimonials() {
     return (
         <section className="relative w-full py-16 bg-neutral-950 text-white">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.08),transparent_60%)]" />
-            <div className="relative max-w-6xl mx-auto px-4 md:px-8">
+            <div className="relative mx-auto px-4 md:px-8">
                 <div className="flex items-end justify-between gap-6 mb-10">
                     <div>
                         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">

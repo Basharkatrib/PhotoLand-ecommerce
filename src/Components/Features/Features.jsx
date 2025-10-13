@@ -7,7 +7,7 @@ function Features() {
     ];
     return (
         <section className="bg-neutral-900 text-white py-10 px-4 md:px-8">
-            <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
                 {items.map((it, idx) => (
                     <div key={idx} className="rounded-lg border border-neutral-800 bg-neutral-900/60 p-4">
                         <div className="text-2xl">{it.icon}</div>

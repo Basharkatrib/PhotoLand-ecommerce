@@ -22,7 +22,7 @@ function FAQ() {
         <section className="relative w-full py-16 bg-gradient-to-b from-neutral-900 via-neutral-900 to-black text-white overflow-hidden">
             <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
             <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-amber-400/10 blur-3xl" />
-            <div className="relative max-w-6xl mx-auto px-4 md:px-8">
+            <div className="relative mx-auto px-4 md:px-8">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
                     <div>
                         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">

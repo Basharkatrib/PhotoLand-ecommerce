@@ -121,10 +121,10 @@ function Product() {
                     <div className='text-neutral-300 text-sm'>Ships within 2-5 business days. 30-day return policy.</div>
                 )}
             </div>
-            <div className='mt-6'>
+            {/* <div className='mt-6'>
                 <div className='text-white font-semibold mb-2'>Related products</div>
                 <Slider />
-            </div>
+            </div> */}
             <div>
                 <ToastContainer
                     position="top-center"
