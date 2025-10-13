@@ -10,6 +10,11 @@ import { setCateg } from './store/categoriesSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Thank from './Pages/Thank/Thank';
+import Login from './Pages/Auth/Login';
+import Register from './Pages/Auth/Register';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,12 +31,15 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/thank" element={<Thank />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>} />
+        <Route path="/product/:id" element={<ProtectedRoute><Product /></ProtectedRoute>} />
+        <Route path="/thank" element={<ProtectedRoute><Thank /></ProtectedRoute>} />
       </Routes>
       <Subscribe />
       <Footer />
+      <ToastContainer position="top-center" autoClose={2500} theme="dark" />
     </>
   );
 }

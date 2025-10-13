@@ -7,6 +7,7 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Checkout from "../Checkout/Checkout";
 import { searchItem } from "../../store/searchSlice";
 import { ToastContainer, toast } from 'react-toastify';
+import { useAuth } from "../../context/AuthContext";
 
 
 function Navbar() {
@@ -26,6 +27,7 @@ function Navbar() {
     const [open, isOpen] = useState(false);
     const [search, setSearch] = useState("");
     const cart = useSelector(state => state.cart);
+    const { user, logout } = useAuth();
 
     useEffect(() => {
         console.log(search);
@@ -57,8 +59,8 @@ function Navbar() {
     return (
         <>
             <nav
-                className="flex-no-wrap top-0 fixed z-50 flex w-full items-center justify-between bg-black py-3 ">
-                <div className="flex w-full flex-wrap items-center justify-between px-2 md:px-3">
+                className="fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between bg-neutral-900/70 backdrop-blur-md border-b border-neutral-800 py-3 shadow-[0_2px_10px_rgba(0,0,0,0.2)]">
+                <div className="flex w-full flex-wrap items-center justify-between px-3 md:px-4 mx-auto">
 
                     <div className="w-full flex justify-between items-center">
 
@@ -69,9 +71,9 @@ function Navbar() {
                         </div>
 
 
-                        <form className="flex items-center w-[600px] h-[30px] mr-2">
-                            <input className="py-1 px-3 placeholder:text-amber-500 h-full rounded-tl rounded-bl w-full border-none outline-none" type="text" placeholder="search" value={search} onChange={(e) => setSearch(e.target.value)} />
-                            <button className="p-1.5 md:px-4 bg-amber-500 flex items-center justify-center h-full rounded-tr rounded-br ">
+                        <form className="hidden md:flex items-center w-[480px] h-[36px] mr-2">
+                            <input className="h-full w-full rounded-full bg-neutral-800 text-white border border-neutral-700 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 transition px-4 placeholder:text-neutral-400" type="text" placeholder="Search products" value={search} onChange={(e) => setSearch(e.target.value)} />
+                            <button className="-ml-12 px-6 h-[36px] bg-amber-500 text-black font-semibold rounded-full hover:bg-amber-400 transition">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 512 512"
@@ -82,11 +84,21 @@ function Navbar() {
                         </form>
 
 
-                        <div className="relative flex items-center">
-                            <a className="dark:text-white cursor-pointer" onClick={() => isOpen(true)}>
-                                <span className="[&>svg]:w-9 ">
+                        <div className="relative flex items-center gap-3">
+                            {user ? (
+                                <>
+                                    <span className="text-white text-xs md:text-sm bg-neutral-800/70 border border-neutral-700 px-2 py-1 rounded-md">{user.email}</span>
+                                    <button onClick={async () => { await logout(); toast.success('Signed out'); }} className="text-black bg-amber-500 px-3 py-1 rounded-md text-sm md:text-base hover:bg-amber-400 transition">Logout</button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/login" className="text-white hover:text-amber-400 text-sm md:text-base transition">Login</Link>
+                                    <Link to="/register" className="text-black bg-amber-500 px-3 py-1 rounded-md text-sm md:text-base hover:bg-amber-400 transition">Register</Link>
+                                </>
+                            )}
+                            <a className="dark:text-white cursor-pointer relative inline-flex items-center justify-center rounded-full bg-neutral-800/60 hover:bg-neutral-700 p-2 border border-neutral-700 transition" onClick={() => isOpen(true)}>
+                                <span className="[&>svg]:w-7 ">
                                     <svg
-
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
                                         fill="#ffffff">
@@ -94,8 +106,7 @@ function Navbar() {
                                             d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
                                     </svg>
                                 </span>
-                                <div className="text-white px-1 text-[14px] bg-amber-500 rounded-full right-0 absolute top-0">{cart.items.length}</div>
-
+                                <div className="text-black font-semibold px-1.5 min-w-5 text-center text-[12px] bg-amber-500 border border-amber-400 rounded-full absolute -top-1 -right-1">{cart.items.length}</div>
                             </a>
                         </div>
                     </div>

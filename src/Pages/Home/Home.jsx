@@ -1,6 +1,10 @@
 import ListCategory from "../../Components/ListCategory/ListCategory";
 import NewProducts from "../../Components/NewProducts/NewProducts";
 import Slider from "../../Components/Slider/Slider";
+import FAQ from "../../Components/FAQ/FAQ";
+import Testimonials from "../../Components/Testimonials/Testimonials";
+import Features from "../../Components/Features/Features";
+import Brands from "../../Components/Brands/Brands";
 
 function Home() {
     return (
@@ -10,6 +14,10 @@ function Home() {
                 <Slider />
             </div>
             <NewProducts />
+            <Features />
+            <Brands />
+            <Testimonials />
+            <FAQ />
         </div>
 
 

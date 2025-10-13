@@ -40,14 +40,14 @@ function ListCategory() {
 
     return (
         <>
-            <div className=' hidden md:block h-fit bg-black rounded-md text-white basis-1/5'>
-                <div className='bg-amber-500 py-2 rounded-t-md rounded-tr-md text-center font-bold'>
+            <div className=' hidden md:block h-fit bg-neutral-900 rounded-lg text-white basis-1/5 border border-neutral-800 overflow-hidden'>
+                <div className='bg-gradient-to-r from-amber-500 to-amber-400 py-2 text-center font-bold'>
                     BROWSE CATEGORIES
                 </div>
-                <ul className='text-white h-[250px]  overflow-auto'>
+                <ul className='text-white h-[300px] overflow-auto divide-y divide-neutral-800'>
                     {categories.map((category) => (
                         <Link to="/products" key={category.id}>
-                            <li className={`${setCategory === category.title ? 'text-amber-500' : ''} border-b-2 border-amber-500 p-2`} onClick={() => handleCategoryClick(category.id, category.title)}> 
+                            <li className={`cursor-pointer hover:bg-neutral-800/60 transition ${setCategory === category.title ? 'text-amber-500' : ''} p-2`} onClick={() => handleCategoryClick(category.id, category.title)}> 
                                 {category.title}
                             </li>
                         </Link>
@@ -60,12 +60,12 @@ function ListCategory() {
                     modules={[Navigation, Pagination, FreeMode]}
                     slidesPerView={3}
                     freeMode={true}
-                    className=' text-white w-full h-7'
+                    className=' text-white w-full h-8'
                 >
                     {categories.map((category) => (
-                        <SwiperSlide className='w-12' >
+                        <SwiperSlide className='w-12' key={category.id}>
                             <Link to="/products" key={category.id}>
-                                <div className={`${setCategory === category.title ? 'text-amber-500' : ''} text-[14px] border-r-2 border-amber-500 text-center`} onClick={() => handleCategoryClick(category.id, category.title)}> {/* ✅ التصحيح هنا */}
+                                <div className={`px-2 ${setCategory === category.title ? 'text-amber-500' : ''} text-[14px] border-r-2 border-amber-500 text-center`} onClick={() => handleCategoryClick(category.id, category.title)}>
                                     {category.title}
                                 </div>
                             </Link>
