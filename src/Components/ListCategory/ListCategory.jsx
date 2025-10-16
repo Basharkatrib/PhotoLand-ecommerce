@@ -35,7 +35,38 @@ function ListCategory() {
         // console.log(active);
     };
 
-    if (status === 'loading') return <p>Loading categories...</p>;
+    if (status === 'loading') return (
+        <>
+            <div className=' hidden md:block h-fit bg-neutral-900 rounded-lg text-white basis-1/5 border border-neutral-800 overflow-hidden'>
+                <div className='bg-gradient-to-r from-amber-500 to-amber-400 py-2 text-center font-bold'>
+                    BROWSE CATEGORIES
+                </div>
+                <ul className='text-white h-[300px] overflow-auto divide-y divide-neutral-800'>
+                    {Array.from({ length: 8 }).map((_, idx) => (
+                        <li key={idx} className='p-2'>
+                            <div className='h-4 w-40 rounded bg-neutral-800 animate-pulse' />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className='md:hidden'>
+                <Swiper
+                    modules={[Navigation, Pagination, FreeMode]}
+                    slidesPerView={3}
+                    freeMode={true}
+                    className=' text-white w-full h-8'
+                >
+                    {Array.from({ length: 6 }).map((_, idx) => (
+                        <SwiperSlide className='w-12' key={`cat-skel-${idx}`}>
+                            <div className='px-2 text-[14px]'>
+                                <div className='h-4 w-16 rounded bg-neutral-800 animate-pulse' />
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
+        </>
+    );
     if (status === 'failed') return <p>Error: {error}</p>;
 
     return (

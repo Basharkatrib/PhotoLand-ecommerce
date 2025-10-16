@@ -11,6 +11,7 @@ import 'swiper/css/scrollbar';
 import { Link } from "react-router-dom";
 function NewProducts() {
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,6 +21,8 @@ function NewProducts() {
                 console.log("Response:", res.data);
             } catch (err) {
                 console.log("Error details:", err.response);
+            } finally {
+                setIsLoading(false);
             }
         }
         fetchData();
@@ -66,30 +69,41 @@ function NewProducts() {
                 pagination={{ clickable: true, }}
                 className=' text-white w-full h-full mt-5'
             >
-                {products.map((product) => (
-                    <SwiperSlide className="w-full " key={product.id}>
-                        <div className='h-[320px] group bg-neutral-900 border border-neutral-800 hover:border-amber-500/40 rounded-lg flex flex-col justify-between p-3 relative transition'>
-                            {product.image && product.image.length > 0 ? (
-                                <div className='w-full flex justify-center h-1/2 cursor-pointer overflow-hidden rounded-md'>
-                                    <img
-                                        className='object-cover h-full w-full transition-transform duration-300 group-hover:scale-105'
-                                        src={product.image[0].url}
-                                        alt={product.title}
-                                    />
-                                </div>
-                            ) : (
-                                <p>No Image Available</p>
-                            )}
-                            <div className='text-amber-500 font-bold mt-2 line-clamp-1'>{product.title}</div>
-                            <div className='text-neutral-300 h-12 w-full overflow-hidden line-clamp-2 text-sm'>{product.desc}</div>
-                            <div className=' w-full flex justify-between items-center mt-1'>
-                                <div className='text-amber-500 font-semibold'>${product.price}</div>
-                                <Link to={`/product/${product.documentId}`}><div className=' text-amber-500 px-2 flex justify-center items-center rounded-lg cursor-pointer gap-2 hover:text-amber-300 transition'>View Details <svg xmlns="http://www.w3.org/2000/svg" height="20" width="17.5" viewBox="0 0 448 512"><path fill="#f59e0b" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></div></Link>
+                {isLoading
+                    ? Array.from({ length: 5 }).map((_, idx) => (
+                        <SwiperSlide className="w-full" key={`skeleton-${idx}`}>
+                            <div className='h-[320px] bg-neutral-900 border border-neutral-800 rounded-lg flex flex-col justify-between p-3 relative'>
+                                <div className='w-full h-1/2 rounded-md bg-neutral-800 animate-pulse' />
+                                <div className='mt-3 h-5 w-2/3 rounded bg-neutral-800 animate-pulse' />
+                                <div className='mt-2 h-10 w-full rounded bg-neutral-800 animate-pulse' />
+                                <div className='mt-2 h-6 w-24 rounded bg-neutral-800 animate-pulse' />
                             </div>
-                            <div className={`${product.isNew ? "block" : "hidden"} bg-amber-500 px-2 rounded-lg font-bold absolute top-2 right-2 text-black`}>NEW</div>
-                        </div>
-                    </SwiperSlide>
-                ))}
+                        </SwiperSlide>
+                    ))
+                    : products.map((product) => (
+                        <SwiperSlide className="w-full " key={product.id}>
+                            <div className='h-[320px] group bg-neutral-900 border border-neutral-800 hover:border-amber-500/40 rounded-lg flex flex-col justify-between p-3 relative transition'>
+                                {product.image && product.image.length > 0 ? (
+                                    <div className='w-full flex justify-center h-1/2 cursor-pointer overflow-hidden rounded-md'>
+                                        <img
+                                            className='object-cover h-full w-full transition-transform duration-300 group-hover:scale-105'
+                                            src={product.image[0].url}
+                                            alt={product.title}
+                                        />
+                                    </div>
+                                ) : (
+                                    <p>No Image Available</p>
+                                )}
+                                <div className='text-amber-500 font-bold mt-2 line-clamp-1'>{product.title}</div>
+                                <div className='text-neutral-300 h-12 w-full overflow-hidden line-clamp-2 text-sm'>{product.desc}</div>
+                                <div className=' w-full flex justify-between items-center mt-1'>
+                                    <div className='text-amber-500 font-semibold'>${product.price}</div>
+                                    <Link to={`/product/${product.documentId}`}><div className=' text-amber-500 px-2 flex justify-center items-center rounded-lg cursor-pointer gap-2 hover:text-amber-300 transition'>View Details <svg xmlns="http://www.w3.org/2000/svg" height="20" width="17.5" viewBox="0 0 448 512"><path fill="#f59e0b" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></div></Link>
+                                </div>
+                                <div className={`${product.isNew ? "block" : "hidden"} bg-amber-500 px-2 rounded-lg font-bold absolute top-2 right-2 text-black`}>NEW</div>
+                            </div>
+                        </SwiperSlide>
+                    ))}
 
 
             </Swiper>
