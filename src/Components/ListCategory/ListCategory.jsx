@@ -94,7 +94,7 @@ function ListCategory() {
                     className=' text-white w-full h-8'
                 >
                     {categories.map((category) => (
-                        <SwiperSlide className='w-12' key={category.id}>
+                        <SwiperSlide className='w-12 mt-3' key={category.id}>
                             <Link to="/products" key={category.id}>
                                 <div className={`px-2 ${setCategory === category.title ? 'text-amber-500' : ''} text-[14px] border-r-2 border-amber-500 text-center`} onClick={() => handleCategoryClick(category.id, category.title)}>
                                     {category.title}

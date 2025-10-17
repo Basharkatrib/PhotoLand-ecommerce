@@ -12,7 +12,6 @@ import { useEffect } from 'react';
 import Thank from './Pages/Thank/Thank';
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
-import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -33,9 +32,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>} />
-        <Route path="/product/:id" element={<ProtectedRoute><Product /></ProtectedRoute>} />
-        <Route path="/thank" element={<ProtectedRoute><Thank /></ProtectedRoute>} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/thank" element={<Thank />} />
       </Routes>
       <Subscribe />
       <Footer />
