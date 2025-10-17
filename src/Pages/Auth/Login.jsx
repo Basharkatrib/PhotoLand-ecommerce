@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -13,13 +15,48 @@ function Login() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if (user) {
+            const redirectTo = location.state?.from?.pathname || "/";
+            navigate(redirectTo, { replace: true });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
+
+    const isMobileDevice = () =>
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+        );
 
     const signInWithGoogle = async () => {
         setError("");
         setSubmitting(true);
         try {
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
+            provider.setCustomParameters({ prompt: "select_account" });
+
+            if (isMobileDevice()) {
+                await signInWithRedirect(auth, provider);
+                return;
+            }
+
+            try {
+                await signInWithPopup(auth, provider);
+            } catch (err) {
+                const popupErrors = [
+                    "auth/popup-blocked",
+                    "auth/popup-closed-by-user",
+                    "auth/cancelled-popup-request",
+                ];
+                if (popupErrors.includes(err.code)) {
+                    await signInWithRedirect(auth, provider);
+                    return;
+                }
+                throw err;
+            }
+
             toast.success("Signed in with Google");
             const redirectTo = location.state?.from?.pathname || "/";
             navigate(redirectTo, { replace: true });
